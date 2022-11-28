@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600;700;800&family=Frank+Ruhl+Libre:wght@200;300;400;500;600&family=Encode+Sans+Semi+Condensed:wght@400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/all.min.css">
+    <link disabled id="dark-mode-theme" rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/my_style.css">
+    
+    
+    
+    <title>Hugsch Digital Garden | Creating a travel map of your last holiday</title>
+    <meta name="description" content="Using Blender and QGIS to create a travel map.">
+</head><body><nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="http://localhost:1313/">
+            
+            <b style="font-weight: 800;">hugsch</b>
+            
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto mt-2 mt-lg-0"><li class='nav-item '>
+                    <a class="nav-link" href="/garden/"> Digital Garden</a>
+                </li>
+            <li class='nav-item '>
+                    <a class="nav-link" href="/projects/"> Projects</a>
+                </li>
+            <li class='nav-item '>
+                    <a class="nav-link" href="/library/"> Library</a>
+                </li>
+            <li class='nav-item '>
+                    <a class="nav-link" href="/about/"> About</a>
+                </li>
+             
+            <li class="nav-item px-2 pt-1">
+                <a class="btn fas fa-moon" id="dark-mode-toggle"></a>
+            </li>
+            </ul>
+        </div>
+    </div>
+</nav><div id="content">
+
+<div class="container" style="max-width: 800px;">
+    <div class="py-4 rounded-3">
+        <div class="container-fluid py-2">
+            <h1 class="display-2 mb-4 text-center">Creating a travel map of your last holiday</h1>
+        </div>
+        
+        <p class="text-center fs-4 fst-italic serif">Using Blender and QGIS to create a travel map.</p>
+        
+        <div class="text-center pt-4">
+            
+        </div>
+    </div>
+    <div class="row justify-content-center mb-5">
+        <div class="col-12">
+            <p class="card-date m-0">
+                
+                
+                    Created Nov 28, 2022 - 
+                
+                Last updated: Nov 28, 2022
+            </p>
+            <hr class="dropdown-divider">
+            <div class="row justify-content-between">
+                <div class="col-sm-4">
+                    
+    
+    <span class="status">Seeding 🌱</span>
+    
+
+                </div>
+                <div class="col-sm-8" style="text-align: right;">
+                    
+                
+                    
+                    <span class="badge tag-badge">blender</span>
+                    
+                    <span class="badge tag-badge">QGIS</span>
+                    
+                
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid py-2">
+        <div class="serif main-content">
+            <p>Did you ever need a map to illustrate your magnificent trip of the last holidays? Of course, you can find plenty of maps on the internet but to find just that one you have in mind? Either, they are too small or too large, too colorful, too crowded, &hellip;. It <em>should</em> be rather easy to create your own map with exactly that look and feel that you wish with those two great open-source tools: <a href="https://www.qgis.org/">QGIS</a> and <a href="https://www.blender.org">Blender</a>.</p>
+<p>I would like to have some kind of inset map with a small locator globe to show where on earth my vacation spot was situated with a bigger flat map in the background. My first attempt to create the locator globe was rather successful. Another (supposedly simpler) technique however resulted in a pile of problems and work-arounds.</p>
+<p>[here about example]</p>
+<h1 id="creating-a-small-locator-globe-with-qgis-and-blender">Creating a small locator globe with QGIS and Blender</h1>
+<p>First, you need some geographical data for creating the maps. There are lots of possibilities but, perhaps, the easiest is to download some data-files for your region. A very good starting point for global data are the free vector and raster map data from <a href="https://www.naturalearthdata.com/">Natural Earth</a>. For a locator globe, you don&rsquo;t need very detailled data; a scale of 1:110m is sufficient (1 to 110 million or 1 cm = 1,100 km). Also, you don&rsquo;t need any cultural information (e.g. country borders, etc.). I start with some basic and simple globe but will improve upon it later on. So, you only need the following files</p>
+<ul>
+<li>Coastline: ne_110m_coastline.zip <a href="/http//www.naturalearthdata.com/download/110m/physical/ne_110m_coastline.zip">link</a></li>
+<li>Graticules at 15° interval: ne_110m_graticules_15.zip <a href="http//www.naturalearthdata.com/download/110m/physical/ne_110m_graticules_15.zip">link</a></li>
+</ul>
+<p>You don&rsquo;t have to unzip the files. Qgis can work right away with the zip files. Start QGIS and drag the zip-files to the Layers panel (see figure 1). Note that only the shp-file is added to the Layers panel. The map will look something like in figure 1.</p>
+<figure><img src="_qgis-screenshot.svg"
+         alt="Figure 1: QGIS with 2 layers added (coastline and graticules)." width="80%"/><figcaption>
+            <p>Figure 1: QGIS with 2 layers added (coastline and graticules).</p>
+        </figcaption>
+</figure>
+
+<p>QGIS is a layered application such as GIMP or Inkscape. This means that because the graticule layer is below the coastline, the coastline will not be interrupted with the graticule lines. The layer style is a bit changed from the defaults. The coastline has a color of Black and a size of 0.5 mm. You can change this in the Properties panel at the right handside.</p>
+<p>You need to export this image to put it on a locator globe in Blender. Choose the menu Project &gt; Import/Export &gt; Export Map to Image. Choose Calculate from Layer (graticules) to define the size of the image.</p>
+<p>Now, start Blender and create a new project. Replace the default cube with a UV Sphere. Switch in the Properties panel to the Material Properties tab and add a new material. Click on the yellow button next to Base Color to add an Image Texture. Assign the exported image from QGIS with the Open button.</p>
+<figure><img src="blender-screenshot.svg"
+         alt="Figure 2: Blender with textured sphere." width="80%"/><figcaption>
+            <p>Figure 2: Blender with textured sphere.</p>
+        </figcaption>
+</figure>
+
+<h2 id="improvements">Improvements</h2>
+<ul>
+<li>In Blender, you could smooth the sphere by applying a Subdivide Modifier.</li>
+<li>There is also a slight problem with the UV Unwrapping (but you probably won&rsquo;t see it on this small scale). Because the sphere is closed at the top and bottom; you will notice two rows of triangles in the UV map. This is not optimal and will result in distortion. But, at the polar regions, you probably won&rsquo;t notice it. There are a few work-arounds; see for example <a href="https://www.youtube.com/watch?v=72hgMoyTbXE&amp;t=116s">YouTube tutorial</a>.</li>
+<li>In QGIS, you could use the Land and Ocean data set to create a more colorful map. Therefore, you need the data-files: ne_110m_land.zip and ne_110m_ocean.zip. They replace the rather dull coastline data. Of course, you need to change the styles of both layers at bit.</li>
+</ul>
+<h1 id="creating-a-small-locator-globe-with-qgis-only">Creating a small locator globe with QGIS ONLY!</h1>
+<p>Isn&rsquo;t it possible to create the locator globe map within QGIS alone? Yes, but it turns out to have some bumps in the road. Also, you will miss the advantage of being able to rotate the globe (in Blender) and to create for example some day-and-night animation.</p>
+<p>A quick search on the internet (&ldquo;how to create a globe in QGIS&rdquo;) will produce several solutions; e.g <a href="https://cartographyclass.com/a-world-locator-map-in-5-minutes/">cartographyclass.com</a>. They all have in common that you need to create a specific User Coordinate Reference System (CRS). Of course, I followed along and most of the time; it worked -for their coordinates!. Changing the coordinates to see the globe from a different angle, however, resulted most of the time in distortions. For example, straight lines for the parallel and meridian lines, disappearing countries, and so on.</p>
+<p>Moreover, it turns out that QGIS nowadays (version 3.22) already has such a CRS: &ldquo;The world from  space&rdquo; (ESRI:102038). So, after you have added the data-files (coastline &amp; graticule), you need to change the project CRS (which is WGS 84: EPSG:4326 for the Natural Earth data files). Use the menu Project &gt; Properties: choose the 4th tab at the left (Project Coordinate Reference System (CRS) and filter for &ldquo;The world &hellip;&rdquo;. After selecting this CRS, you will notice that there are some straight lines near the North pole which shouldn&rsquo;t be there.</p>
+<p>In the textbox (lower left) of the Project Coordinate Reference System dialog, You can find the definition of this CRS. At the bottom, you will find the associated command that all the tutorials used in one variation or another.</p>
+<p>&lsquo;+proj=ortho +lat_0=42.5333333333 +lon_0=-72.5333333334 +x_0=0 +y_0=0 +ellps=sphere +units=m +no_defs&rsquo;</p>
+<p>With this command, you will create an orthogonal projection, where the earth location (42.53; -72.53) will be placed in the map at coordinate 0,0 (=middle of the map). The projection itself is an ellipse, resembling a sphere.</p>
+<p>The reason why most tutorials gave a satisfying result is the choice of the origin point. For example, the cartographyclass.com tutorial proposes the following command:
+&lsquo;&rsquo;+proj=ortho +lat_0=49.2 +lon_0=-123 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m +no_defs&rsquo;'</p>
+<p>So, with the earth location (7.9; -3.27 which is Ghana) it seemed to be OK. But, try to change the earth location to for example (21; 6) and artifacts will pop-up.</p>
+<p>What exactly is going on, is still an enigma to me. The most comprehensible explanation comes from <a href="https://www.avenza.com/resources/blog/2019/01/14/orthographic-projections/">Avenza.com</a>. With the globe projection, you always can see only half of the flat map. The other half is hidden behind the horizon (azimuth?). So, the QGIS projection command should hide those lines.</p>
+<p>In my tried but failed solutions, I have tried to erase the points in the flat map that weren&rsquo;t visible in the globe view. But, how? Which points should I delete. Drawing a simple circle will not do the job; you are looking from a point in outer space with perspective.</p>
+<ol>
+<li>One solution expands the previous method. Create the globe in Blender. Rotate the globe to your liking. Switch to the UV Editing workspace. Select the globe in Edit mode and select all visible points. The will light up in the UV map. You can add a circle around the globe to make it more precise. Make a screenshot of the UV map and import that UV map in QIS.</li>
+<li>Move &amp; scale the UV bitmap so that it aligns with the shp-layer. After googling &ldquo;qgis scale move a bitmap&rdquo;, it turns out that you need a plugin for that (Freehand Georeferencer). 3. Edit the shp-layer an remove the points that are not visible from your perspective. Once again: some bumps. A layer from a zip-file could not be edited but there seems to be not much info about it. Ultimately, I succeeded to export the layer (right mouse button). This exported layer could be edited with the Vertex tool. Deleting some points, however will reconnect the remaing points, sometimes in a straight line (cause of the artifacts?). You have also to do this with the graticule layer.</li>
+<li>Perhaps, the detour with Blender isn&rsquo;t necessary. May be, I can create a circle within QGIS itself. After one more Google search (try &ldquo;QGIS add circle&rdquo;), I need a memory layer (nowadays called Scratch layer in QGIS) and the &ldquo;Digitizing toolbar&rdquo;. But, this toolbar is greyed out (inactive). You have to change the projection to a flat projection; e.g. WGS84. But then, you relize that you don&rsquo;t know where to draw the circle on the flat map. So, that&rsquo;s a dead end, once again.</li>
+<li>Ultimately, you think you have found a solution at <a href="https://gis.stackexchange.com/questions/78346/ortho-projection-produces-artifacts">StackExchange</a>. You can use a plugin called <a href="https://github.com/jdugge/ClipToHemisphere">Clip to Hemisphere</a>. But to no use. The generated error (ne_110m_land — ne_110m_land.shp has an invalid geopmetry) however will bring you to the explanation.</li>
+</ol>
+<p>After importing the data-files (see above), you need two additional steps:</p>
+<ul>
+<li>Create the custom CRS with the menu Settings &gt; Custom Projections. In the Name field, you can enter the name of your CRS e.g. myGlobe. In the Format &gt; Project String, you need to enter the commands to create a so-called azimuth orthographic projection. In fact, there exists already one : &ldquo;The world from  space&rdquo; (ESRI:102038)</li>
+<li>Switch the project to the just created CRS with menu Project &gt; Properties.</li>
+</ul>
+<h1 id="creating-a-large-map-with-a-detailled-inset">Creating a large map with a detailled inset</h1>
+<p>Figure 3 shows a flat map of the world with all of the countries and one specific is colored. This country is then enlarged in the inset. For this kind of map, you need a better resolution; e.g. the Large Scale data 1:10m (1 cm = 100 km). Because you need the countries, you also need the Cultural data sets.</p>
+<p>ne-10m-admin_0_countries
+add a rule-besed layer styling &ndash;&gt; &ldquo;SOV_A3&rdquo; = &lsquo;BEL&rsquo; + color and TZA</p>
+<p>add a group global &amp; tanzania</p>
+<p>add countries, rivers and lakes center line to group tanzania; eventueel label regions????</p>
+<p>ga naar project &gt; New Print layout. Maak eerst global</p>
+<p>see <a href="https://www.youtube.com/watch?v=2c4axNtuDwI&amp;t=2s">https://www.youtube.com/watch?v=2c4axNtuDwI&amp;t=2s</a></p>
+<p>!!!!! KAARTEN GRABBEN VIA MONITOR 1080P</p>
+<p>, 15, 20,  Our globe will show the physical appearance of earth. For our first map (globe) we need
+graticules &amp; coastline (top)
+change color of both and size
+project &gt; export &gt; calculate from layer (graticules)</p>
+<p>Blender
+add mesh &gt; UV sphere
+(quads)
+add material &gt; change base color to image texture
+switch to UV editing and notice that there are triangles. For this globe, it don&rsquo;t matter.
+(see you tube to fix)</p>
+<p>And then, I don&rsquo;t know.</p>
+<p>maps in project &gt; QGS &gt; Landkaarten &gt; zanzibar</p>
+
+        </div>
+    </div>
+</div>
+
+
+        </div><div class="container">
+    <div class="row justify-content-between">
+        <div class="col-sm-4">
+            <p class="footer">hugsch © 2022 </p>
+        </div>
+        <div class="col-sm-6 d-flex flex-row-reverse">
+            
+            <a class="footer-social px-2" href="https://fosstodon.org/@hugsch" target="_blank"><i class="fab fa-mastodon"></i></a>
+            
+            <a class="footer-social px-2" href="https://github.com/hugsch/digital-garden" target="_blank"><i class="fab fa-github"></i></a>
+            
+            <a class="footer-social px-2" href="#" target="_blank"><i class="fab fa-medium-m"></i></a>
+            
+            <a class="footer-social px-2" href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            
+        </div>
+    </div>
+</div><script src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script src="/js/isotope.pkgd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+<script src="/js/dark.js"></script>
+<script src="/js/isotope.js"></script>
+<script src="/js/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, securityLevel: 'loose'});</script></body>
+</html>
