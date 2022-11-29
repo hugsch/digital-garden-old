@@ -7,8 +7,8 @@ copyright = "hugsch ©"
 
 
 [params]
-  name = "Hugsch Digital Garden"
-  description = "Where info can grow"
+  name = "Digital Garden"
+  description = "Where knowledge can grow"
   initials = "hugsch"
   googleAnalytics = ""
 
@@ -22,30 +22,16 @@ copyright = "hugsch ©"
     link = "https://github.com/hugsch/digital-garden"
     icon = "fab fa-github"
 
-  [[params.social]]
-    name = "Medium" 
-    link = "#"
-    icon = "fab fa-medium-m"
-
-  [[params.social]]
-    name = "LinkedIn"
-    link = "#"
-    icon = "fab fa-linkedin-in"
-
 
 [menu]
   [[menu.main]]
     name = "Digital Garden"
     url = "/garden/"
     weight = 1
-  [[menu.main]]
-    name = "Projects"
-    url = "/projects/"
-    weight = 2
-  [[menu.main]]
-    name = "Library"
-    url = "/library/"
-    weight = 3
+  
+  
+
+  
   [[menu.main]]
     name = "About"
     url = "/about/"

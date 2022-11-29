@@ -13,9 +13,6 @@ Did you ever need a map to illustrate your magnificent trip of the last holidays
 
 I would like to have some kind of inset map with a small locator globe to show where on earth my vacation spot was situated with a bigger flat map in the background. My first attempt to create the locator globe was rather successful. Another (supposedly simpler) technique however resulted in a pile of problems and work-arounds.
 
-[here about example]
-
-
 # Creating a small locator globe with QGIS and Blender
 
 First, you need some geographical data for creating the maps. There are lots of possibilities but, perhaps, the easiest is to download some data-files for your region. A very good starting point for global data are the free vector and raster map data from [Natural Earth](https://www.naturalearthdata.com/). For a locator globe, you don't need very detailled data; a scale of 1:110m is sufficient (1 to 110 million or 1 cm = 1,100 km). Also, you don't need any cultural information (e.g. country borders, etc.). I start with some basic and simple globe but will improve upon it later on. So, you only need the following files 
@@ -51,12 +48,19 @@ Moreover, it turns out that QGIS nowadays (version 3.22) already has such a CRS:
 
 In the textbox (lower left) of the Project Coordinate Reference System dialog, You can find the definition of this CRS. At the bottom, you will find the associated command that all the tutorials used in one variation or another.
 
-'+proj=ortho +lat_0=42.5333333333 +lon_0=-72.5333333334 +x_0=0 +y_0=0 +ellps=sphere +units=m +no_defs'
+```
++proj=ortho +lat_0=42.53 +lon_0=-72.53 +x_0=0 +y_0=0 +ellps=sphere +units=m +no_defs
+```
 
-With this command, you will create an orthogonal projection, where the earth location (42.53; -72.53) will be placed in the map at coordinate 0,0 (=middle of the map). The projection itself is an ellipse, resembling a sphere. 
+With this command, you will create an orthogonal projection, where the earth location (42.53; -72.53) will be placed in the map at coordinate 0,0 (=middle of the map). The projection itself is an ellipse, resembling a sphere.
+
+If you want to use this custom projection, you need to follow the following two steps.
+
+- Create the custom CRS with the menu Settings > Custom Projections. In the Name field, you can enter the name of your CRS e.g. myGlobe. In the Format > Project String, you need to enter the commands to create a so-called azimuth orthographic projection, e.g. +proj= ortho +lat=... (see above)
+- Switch the project to the just created CRS with the menu Project > Properties or the CRS box in the statusbar below (right hand corner).
 
 The reason why most tutorials gave a satisfying result is the choice of the origin point. For example, the cartographyclass.com tutorial proposes the following command:
-''+proj=ortho +lat_0=49.2 +lon_0=-123 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m +no_defs'' 
+''+proj=ortho +lat_0=7.9 +lon_0=-3.27 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m +no_defs'' 
 
 So, with the earth location (7.9; -3.27 which is Ghana) it seemed to be OK. But, try to change the earth location to for example (21; 6) and artifacts will pop-up.
 
@@ -64,60 +68,20 @@ What exactly is going on, is still an enigma to me. The most comprehensible expl
 
 In my tried but failed solutions, I have tried to erase the points in the flat map that weren't visible in the globe view. But, how? Which points should I delete. Drawing a simple circle will not do the job; you are looking from a point in outer space with perspective.
 
-1. One solution expands the previous method. Create the globe in Blender. Rotate the globe to your liking. Switch to the UV Editing workspace. Select the globe in Edit mode and select all visible points. The will light up in the UV map. You can add a circle around the globe to make it more precise. Make a screenshot of the UV map and import that UV map in QIS.
-2. Move & scale the UV bitmap so that it aligns with the shp-layer. After googling "qgis scale move a bitmap", it turns out that you need a plugin for that (Freehand Georeferencer). 3. Edit the shp-layer an remove the points that are not visible from your perspective. Once again: some bumps. A layer from a zip-file could not be edited but there seems to be not much info about it. Ultimately, I succeeded to export the layer (right mouse button). This exported layer could be edited with the Vertex tool. Deleting some points, however will reconnect the remaing points, sometimes in a straight line (cause of the artifacts?). You have also to do this with the graticule layer.
-3. Perhaps, the detour with Blender isn't necessary. May be, I can create a circle within QGIS itself. After one more Google search (try "QGIS add circle"), I need a memory layer (nowadays called Scratch layer in QGIS) and the "Digitizing toolbar". But, this toolbar is greyed out (inactive). You have to change the projection to a flat projection; e.g. WGS84. But then, you relize that you don't know where to draw the circle on the flat map. So, that's a dead end, once again.
-4. Ultimately, you think you have found a solution at [StackExchange](https://gis.stackexchange.com/questions/78346/ortho-projection-produces-artifacts). You can use a plugin called [Clip to Hemisphere](https://github.com/jdugge/ClipToHemisphere). But to no use. The generated error (ne_110m_land — ne_110m_land.shp has an invalid geopmetry) however will bring you to the explanation. 
+1. One solution expands the previous method. Create the globe in Blender. Rotate the globe to your liking. Switch to the UV Editing workspace. Select the globe in Edit mode and select all visible points. They will light up in the UV map. You can add a circle around the globe to make it more precise. Make a screenshot of the UV map and import that UV map in QIS.
+2. Move & scale the UV bitmap so that it aligns with the shp-layer. After googling "qgis scale move a bitmap", it turns out that you need a plugin for that (Freehand Georeferencer).
+3. Edit the shp-layer and remove the points that are not visible from your perspective. Once again: some obstacles. A layer from a zip-file could not be edited but there seems to be not much info about that. Ultimately, I succeeded to export the layer (right mouse button). This exported layer could be edited with the Vertex tool. Deleting some points, however will reconnect the remaining points, sometimes in a straight line (is this the cause of the artifacts?). You have also to do this with the graticule layer.
+3. Perhaps, the detour with Blender isn't necessary. May be, I can create a circle within QGIS itself. After one more Google search (try "QGIS add circle"), I need a memory layer (nowadays called Scratch layer in QGIS) and the "Digitizing toolbar". But, this toolbar is greyed out (inactive). You have to change the projection to a flat projection; e.g. WGS84. But by then, you realize that you don't know where to draw the circle on the flat map. So, that's a dead end, once again.
+4. Ultimately, you think you have found a solution at [StackExchange](https://gis.stackexchange.com/questions/78346/ortho-projection-produces-artifacts). You can use a plugin called [Clip to Hemisphere](https://github.com/jdugge/ClipToHemisphere). But to no use! An error pops up: ne_110m_land.shp has an invalid geometry.
 
-  After importing the data-files (see above), you need two additional steps:
-
-- Create the custom CRS with the menu Settings > Custom Projections. In the Name field, you can enter the name of your CRS e.g. myGlobe. In the Format > Project String, you need to enter the commands to create a so-called azimuth orthographic projection. In fact, there exists already one : "The world from  space" (ESRI:102038)
-- Switch the project to the just created CRS with menu Project > Properties.
-
+> The following text isn't finished yet. Better return in the future to read further!
 
 # Creating a large map with a detailled inset
 
-Figure 3 shows a flat map of the world with all of the countries and one specific is colored. This country is then enlarged in the inset. For this kind of map, you need a better resolution; e.g. the Large Scale data 1:10m (1 cm = 100 km). Because you need the countries, you also need the Cultural data sets.  
+Figure 3 shows a flat map of the world with all of the countries and one specific is colored. This country is then enlarged in the inset. For this kind of map, you need a better resolution; e.g. the Large Scale data 1:10m (1 cm = 100 km). Because you need the countries, you also need the Cultural data sets (ne-10m-admin_0_countries). 
 
-ne-10m-admin_0_countries
-add a rule-besed layer styling --> "SOV_A3" = 'BEL' + color and TZA
-
-add a group global & tanzania
-
-add countries, rivers and lakes center line to group tanzania; eventueel label regions????
-
-ga naar project > New Print layout. Maak eerst global
-
-see https://www.youtube.com/watch?v=2c4axNtuDwI&t=2s
-
-
-!!!!! KAARTEN GRABBEN VIA MONITOR 1080P
-
-
-
-, 15, 20,  Our globe will show the physical appearance of earth. For our first map (globe) we need 
-graticules & coastline (top)
-change color of both and size
-project > export > calculate from layer (graticules)
-
-Blender
-add mesh > UV sphere
-(quads)
-add material > change base color to image texture
-switch to UV editing and notice that there are triangles. For this globe, it don't matter.
-(see you tube to fix)
-
-
- 
-
-And then, I don't know.
-
-maps in project > QGS > Landkaarten > zanzibar
-
-
-
-
-
-
-
+- add a rule-based layer styling --> "SOV_A3" = 'BEL' + color and TZA
+- add a group global & TZA
+- add countries, rivers and lakes center line to group TZA; label regions?
+- Select project > New Print layout. Create the global map first. see https://www.youtube.com/watch?v=2c4axNtuDwI&t=2s
 

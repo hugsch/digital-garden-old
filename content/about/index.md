@@ -1,13 +1,10 @@
 ---
-title: "Nigalya Ponya"
-date: 2015-01-01
-summary: "Himalayan red panda"
+title: "Bio"
+date: 2022-11-29
+summary: " "
 layout: about
 ---
 
-I have a reddish-brown fur, a long, shaggy tail, and a waddling gait due to my shorter front legs; I'm roughly the size of a domestic cat, though with a longer body.
-I live in trees and feed mainly on bamboo, but I also eat eggs, birds, and insects.
+I'm a retired psychology professor but still active computer nerd. I love to use and dissect software, in particular open-source software such as Blender, QGIS, ffmpeg, Exiftools and others.
 
-I joined the IUCN Endangered species red list in 2008 as a result of a constant population decline caused by habitat loss, poaching and inbreed depression.
-
-For more information, you can take a look at my [Wikipedia page](https://en.wikipedia.org/wiki/Red_panda_)
+This digital garden is my way of trying to stay on top of all that information and also a way of contributing to those lovely open-source projects.
