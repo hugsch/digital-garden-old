@@ -1,4 +1,4 @@
-baseURL = 'https://hugsch.github.io/'
+baseURL = 'https://hugsch.github.io/digital-garden/'
 languageCode = 'en-us'
 title = "Hugsch Digital Garden"
 theme = "hugo-digital-garden-theme"
