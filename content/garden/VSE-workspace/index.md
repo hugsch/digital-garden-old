@@ -4,7 +4,7 @@ date: 2022-11-25
 lastmod: 2022-11-28
 draft: false
 garden_tags: ["blender", "VSE"]
-summary: "The default VSE workspace is already very user-friendly. However, as with most Blender components, you can heavily customize the UI."
+summary: "The default VSE workspace is already very user-friendly. As with most Blender components, you can heavily customize the UI."
 status: "seeding"
 ---
 
