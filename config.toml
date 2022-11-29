@@ -1,6 +1,8 @@
 baseURL = 'https://hugsch.github.io/'
 languageCode = 'en-us'
 title = "Hugsch Digital Garden"
+theme = "hugo-digital-garden-theme"
+themesdir = "themes"
 
 copyright = " "
 
