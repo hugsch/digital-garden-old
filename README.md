@@ -1,3 +1,3 @@
 # digital-garden
-Where info can grow
+Where knowledge can grow
 Welcome
