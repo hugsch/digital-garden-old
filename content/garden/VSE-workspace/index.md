@@ -29,4 +29,3 @@ The built-in Video Editing workspace is very handy and it can be customized easi
 {{< figure src="https://raw.githubusercontent.com/tin2tin/Sequence_Editing/main/Sequence_Editing.png" caption="Figure 2: A customized Video Editing Workspace." alt= "A customized Video Editing Workspace" width="100%">}}
 
 Please, note that the Timeline editor -area (5) in figure 2- is removed and that the Playback controls are placed in the header of the Sequencer. Several add-ons are automatically installed (e.g. Transform tools), together with some new operators (e.g. Remove Gap after ...). Last but not least, the Properties editor is also removed and the project settings are placed in the Preview sidebar, where they can easily toggled on/off with the N-key.
-
