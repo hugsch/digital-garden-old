@@ -1,8 +1,8 @@
 ---
-title: "Creating a travele map"
-date: 2022-11-28
-lastmod: 2022-12-01
-draft: false
+title: "Creating a traveling map"
+date: 2022-12-05
+lastmod: 2022-12-08
+draft: true
 garden_tags: ["blender", "QGIS"]
 summary: "Using QGIS to create a big map with an inset."
 status: "seeding"
